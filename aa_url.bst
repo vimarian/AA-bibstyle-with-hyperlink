@@ -2,7 +2,7 @@
 %% Enabling the ADSURL and DOI entry to create clickable links in ref.
 
 %% 2001/06/10 EDP Sciences
-%% APJ, corrected by hand to get results for A&A, using Natbib   
+%% APJ, corrected by hand to get results for A&A, using Natbib
 
 %% 1998/08/12  J Baker
 %% Tweaked by hand to get correct results for ApJ.  Added functions from
@@ -25,7 +25,7 @@
 %% merlin.mbs  (with options: `,ay,nat,nm-rev,nmdash,dt-beg,yr-per,note-yr,atit-u,jtit-x,jttl-rm,thtit-a,vnum-x,volp-com,jpg-1,pp-last,btit-rm,add-pub,pub-par,pre-edn,edby,edbyx,blk-com,fin-bare,ppx,ed,abr,ord,jabr,eprint,amper,em-x')
 %% ----------------------------------------
 %% *** Bibliographic Style for ApJ ***
-%% 
+%%
  %-------------------------------------------------------------------
  % The original source file contains the following version information:
  % \ProvidesFile{merlin.mbs}[1998/02/25 3.85a (PWD)]
@@ -97,7 +97,7 @@ ENTRY
     type
     volume
     year
-    adsurl  
+    adsurl
   }
   {}
   { label extra.label sort.label short.list }
@@ -585,7 +585,7 @@ FUNCTION {format.note}
 FUNCTION {format.eprint}
 { eprint duplicate$ empty$
     'skip$
-    { "[\eprint" 
+    { "[\eprint"
       archiveprefix empty$
         'skip$
         { "[" * archiveprefix * "]" * }
@@ -599,7 +599,7 @@ FUNCTION {format.eprint}
 FUNCTION {format.title}
 { title empty$
     { "" }
-    { title 
+    { title
     }
   if$
 }
@@ -1096,7 +1096,7 @@ FUNCTION {format.full.book.spec} % The title should be on the stack.
 	    { " No." number tie.or.space.connect * }
 	    if$
 	}
-	{ series ", Vol." volume tie.or.space.connect *  
+	{ series ", Vol." volume tie.or.space.connect *
           ", " * swap$ format.ed.booktitle *
 	  number empty$
 	    'skip$
@@ -1119,7 +1119,7 @@ INTEGERS { nameptr namesleft numnames }
 
 FUNCTION {make.href.hyperref}
 {
-  "\href{" swap$ * "}{" * swap$ * "}" * 
+  "\href{" swap$ * "}{" * swap$ * "}" *
 }
 
 
@@ -1128,7 +1128,7 @@ FUNCTION {format.journal}
     { "" }
     { doi empty$
         { journal }
-        { "\href{http://dx.doi.org/" doi * "}{\color{magenta}" * journal * "}" * }
+        { "\href{http://dx.doi.org/" doi * "}{\color{brown}" * journal * "}" * }
       if$
     }
   if$
@@ -1153,10 +1153,10 @@ FUNCTION {article}
       format.pages output
     }
   if$
-  adsurl empty$
+  url empty$
   	{ format.vol.num.pages output }
   	{
-  	format.journal.pages adsurl make.href.hyperref 
+  	format.journal.pages url make.href.hyperref
   	format.note output
 	}
 	if$
@@ -1297,7 +1297,7 @@ FUNCTION {inproceedings}
 %    { format.incoll.inproc.crossref output.nonnull
 %    }
 %  if$
-  format.pages output adsurl make.href.hyperref
+  format.pages output url make.href.hyperref
   format.note output
   fin.entry
 }
@@ -1353,7 +1353,7 @@ FUNCTION {format.phdtitle}
     { "" }
     { doi empty$
         { title }
-        { "\href{" adsurl * "}{\color{magenta}" * title * "}" * }
+        { "\href{" url * "}{\color{brown}" * title * "}" * }
       if$
     }
   if$
@@ -1366,7 +1366,7 @@ FUNCTION {phdthesis}
 %%%%%  name.or.dash
   format.date "year" output.check
   date.block
-  format.phdtitle adsurl make.href.hyperref output 
+  format.phdtitle url make.href.hyperref output
   bbl.phdthesis format.thesis.type output.nonnull
   school "school" output.check
   address output
@@ -1402,7 +1402,7 @@ FUNCTION {proceedings}
 %  address output
 %  organization output
 %  publisher output
-  format.pages output adsurl make.href.hyperref
+  format.pages output url make.href.hyperref
   format.note output
   fin.entry
 }
@@ -1743,4 +1743,3 @@ EXECUTE {end.bib}
 %% End of customized bst file
 %%
 %% End of file `apj.bst'.
-
